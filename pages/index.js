@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import client from "../lib/apollo-client";
 import { BULLETINS_LIST } from "../lib/queries";
 import { createDateObject, createDateString } from "../lib/dateUtils";
@@ -31,7 +32,11 @@ export default function Home({ bulletins }) {
             {bulletins.map((bulletin) => {
               const date = createDateObject(bulletin.date);
               return (
-                <li key={bulletin.bulletin_id}>{createDateString(date)}</li>
+                <li key={bulletin.bulletin_id}>
+                  <Link href={`/bulletins/${bulletin.bulletin_id}`}>
+                    {createDateString(date)}
+                  </Link>
+                </li>
               );
             })}
           </ul>
