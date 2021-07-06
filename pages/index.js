@@ -12,6 +12,7 @@ export async function getStaticProps() {
     props: {
       bulletins: data.bulletins,
     },
+    revalidate: 60,
   };
 }
 
