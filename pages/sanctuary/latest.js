@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { LATEST_PUBLISHED_BULLETIN } from "../../lib/queries";
-import { getDateSearchString } from "../../lib/dateUtils"
+import { getDateSearchString } from "../../lib/dateUtils";
 import client from "../../lib/apollo-client";
 
 export default function LatestSanctuary() {
@@ -12,7 +12,7 @@ export default function LatestSanctuary() {
         const { data } = await client.query({
           query: LATEST_PUBLISHED_BULLETIN,
           variables: {
-            date: getDateSearchString()
+            date: getDateSearchString(new Date()),
           },
         });
         console.log({ data });

@@ -34,7 +34,9 @@ export default function Home() {
                 <Button href="/sanctuary/latest" primary>
                   Latest
                 </Button>
-                <Button href="/sanctuary">Archive</Button>
+                <Button href="/sanctuary" disabled>
+                  Archive
+                </Button>
               </div>
             </section>
           </main>
