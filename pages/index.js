@@ -1,10 +1,9 @@
 import { theme } from "../styles/global";
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
-import esumcLogo from "../public/esumclogo.png";
 import roseWindow from "../public/rosette.png";
 import Button from "../components/Button";
+import ESUMCLogo from "../components/ESUMCLogo";
 
 export default function Home() {
   return (
@@ -15,15 +14,11 @@ export default function Home() {
       <div className="container">
         <div className="box">
           <header>
-            <Link href="https://esumc.org" passHref>
-              <div className="esumcLogo">
-                <Image src={esumcLogo} alt="ESUMC logo" />
-              </div>
-            </Link>
-            <h1>ESUMC Online Bulletins</h1>
+            <ESUMCLogo />
+            <h1 style={{ marginTop: "1rem" }}>ESUMC Online Bulletins</h1>
           </header>
           <main>
-            <section>
+            <section style={{ marginTop: "2rem" }}>
               <div className="sectionHeader">
                 <div className="sectionLogo">
                   <Image src={roseWindow} alt="Rose Window" />
@@ -62,10 +57,6 @@ export default function Home() {
             border-radius: 7px;
             -webkit-box-shadow: 6px 5px 15px -4px rgba(113, 113, 113, 0.63);
             box-shadow: 6px 5px 15px -4px rgba(113, 113, 113, 0.63);
-          }
-          .esumcLogo {
-            max-width: 300px;
-            cursor: pointer;
           }
 
           h1 {

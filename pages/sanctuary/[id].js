@@ -213,12 +213,13 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           flex-direction: column;
           align-items: center;
           text-align: center;
+          padding: 10px;
         }
         .bulletinTitle {
           margin-top: 2rem;
           font-weight: normal;
           text-transform: uppercase;
-          line-height: 1.15em;
+          line-height: 1.5em;
         }
         .bulletinSubTitle {
           text-transform: uppercase;
