@@ -26,9 +26,9 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <style jsx global>
-          {globalStyles}
-        </style>
+        {/* <style jsx global> */}
+        {/*   {globalStyles} */}
+        {/* </style> */}
       </Html>
     );
   }
