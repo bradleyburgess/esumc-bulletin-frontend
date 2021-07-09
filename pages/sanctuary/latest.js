@@ -9,13 +9,13 @@ export default function LatestSanctuary() {
   useEffect(() => {
     async function gotoLatestBulletin() {
       try {
+        const date = new Date();
         const { data } = await client.query({
           query: LATEST_PUBLISHED_BULLETIN,
           variables: {
-            date: getDateSearchString(new Date()),
+            date: getDateSearchString(date),
           },
         });
-        console.log({ data });
         const bulletinId = data.sanctuaryBulletins[0].uuid;
         router.push(`/sanctuary/${bulletinId}`);
       } catch (error) {
@@ -24,7 +24,7 @@ export default function LatestSanctuary() {
       }
     }
     gotoLatestBulletin();
-  });
+  }, []);
 
   return <div></div>;
 }

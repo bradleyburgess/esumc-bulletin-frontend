@@ -14,7 +14,6 @@ import {
   formatUrl,
   formatCopyright,
 } from "../../lib/stringUtils";
-import { getFinanceStrings } from "../../lib/financesUtils";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import roseWindow from "../../public/rosette.png";
@@ -85,7 +84,6 @@ export default function BulletinPage({ bulletin, globalSettings }) {
 
   const date = createDateObject(_date);
   const location = makeTitleCase(_location);
-  const financeStrings = getFinanceStrings(finances);
   const urlString = formatUrl(website);
 
   useEffect(() => {
@@ -172,12 +170,12 @@ export default function BulletinPage({ bulletin, globalSettings }) {
               </ul>
             </div>
           </Section>
-          {finances && <Finances finances={financeStrings} />}
+          {finances && <Finances finances={finances} />}
           {altar_flowers && (
             <Section>
               <Heading>Altar Flowers</Heading>
               <div className="sectionContent">
-                <p>{altar_flowers}</p>
+                <P>{altar_flowers}</P>
               </div>
             </Section>
           )}
@@ -186,7 +184,10 @@ export default function BulletinPage({ bulletin, globalSettings }) {
               <Section key={article.__typename + article.id}>
                 <Heading>{article.title}</Heading>
                 <div className="sectionContent">
-                  <P>{article.content}</P>
+                  <ReactMarkdown
+                    components={{ p: P, a: A }}
+                    children={article.content}
+                  />
                 </div>
               </Section>
             ))}

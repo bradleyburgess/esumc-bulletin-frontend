@@ -2,6 +2,7 @@ import { theme } from "../../styles/global";
 import Section from "../../components/Section";
 import Heading from "../../components/Heading";
 import SubHeading from "../../components/SubHeading";
+import { getFinanceStrings } from "../../lib/financesUtils";
 
 const padding = "7px";
 
@@ -69,7 +70,8 @@ const Stat = ({ children }) => (
   </>
 );
 
-const Finances = ({ finances }) => {
+const Finances = ({ finances: _finances }) => {
+  const finances = getFinanceStrings(_finances);
   return (
     <>
       <Section greybox>
