@@ -77,11 +77,13 @@ export default function Home() {
           }
           .sectionHeader h2 {
             font-weight: normal;
-            font-family: ${theme.fonts.serif};
+            font-family: ${theme.fonts.sans};
             // font-size: 1.5em;
+            font-weight: bold;
             text-transform: uppercase;
             text-align: center;
             padding-left: 0.8em;
+            color: ${theme.colors.darkGrey};
           }
           .sectionLogo {
             width: 50px;
