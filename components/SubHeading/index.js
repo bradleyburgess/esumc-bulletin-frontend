@@ -9,7 +9,7 @@ const SubHeading = ({ span, children }) => (
     )}
     <style jsx>{`
       .text {
-        font-family: proxima-nova;
+        font-family: ${theme.fonts.sans};
         font-weight: bold;
         font-size: 1.125rem;
         text-transform: uppercase;

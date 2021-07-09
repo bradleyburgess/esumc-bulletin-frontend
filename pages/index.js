@@ -1,3 +1,4 @@
+import { theme } from "../styles/global";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,7 +68,7 @@ export default function Home() {
 
           h1 {
             font-size: 1.5em;
-            font-family: "adobe-caslon-pro";
+            font-family: ${theme.fonts.serif};
             text-align: center;
           }
           main {
@@ -83,7 +84,7 @@ export default function Home() {
           }
           .sectionHeader h2 {
             font-weight: normal;
-            font-family: adobe-caslon-pro;
+            font-family: ${theme.fonts.serif};
             // font-size: 1.5em;
             text-transform: uppercase;
             text-align: center;

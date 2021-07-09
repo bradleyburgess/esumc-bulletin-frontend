@@ -1,3 +1,4 @@
+import { theme } from "../../styles/global";
 import { useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
@@ -23,8 +24,9 @@ import A from "../../components/Anchor";
 import Heading from "../../components/Heading";
 import SubHeading from "../../components/SubHeading";
 import P from "../../components/Paragraph";
-import GreyBox from "../../components/GreyBox";
 import Copyright from "../../components/Copyright";
+import Section from "../../components/Section";
+import Finances from "../../components/Finances";
 
 export async function getStaticPaths() {
   const { data } = await client.query({
@@ -102,7 +104,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
         <title>Sanctuary: {liturgical_calendar}</title>
       </Head>
       <header className="navigation">
-        <BackButton href="/sanctuary" />
+        {/* <BackButton href="/sanctuary" /> */}
       </header>
       <div className="container">
         <main>
@@ -131,27 +133,27 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           </div>
           <HR />
           {liturgy_order.map((item) => (
-            <section
-              key={item.__typename + item.id}
-              className="bulletinSection"
-            >
+            <Section key={item.__typename + item.id} greybox={item.greybox}>
               <div className="sectionHeading">
                 <Heading>{item.heading}</Heading>
                 {item.subheading && <SubHeading>{item.subheading}</SubHeading>}
               </div>
-              <div className="sectionContent">
+              <div
+                className="sectionContent"
+                style={item.greybox ? { marginLeft: 0 } : null}
+              >
                 {item.content && (
                   <ReactMarkdown
                     remarkPlugins={[gfm]}
                     children={item.content}
-                    components={{ p: P }}
+                    components={{ p: P, a: A }}
                   />
                 )}
               </div>
-            </section>
+            </Section>
           ))}
           <HR />
-          <section className="bulletinSection">
+          <Section>
             <Heading>Serving in Worship</Heading>
             <div className="sectionContent">
               <ul className="servingList">
@@ -169,44 +171,24 @@ export default function BulletinPage({ bulletin, globalSettings }) {
                 ))}
               </ul>
             </div>
-          </section>
-          {finances && (
-            <GreyBox>
-              <Heading>Tithes & Offerings</Heading>
-              <SubHeading>Thank you for your ongoing gifts</SubHeading>
-              <div className="sectionContent">
-                <h3>Actual</h3>
-                <h4>Week of {finances.weekly.week_of}</h4>
-                <p>{financeStrings.weekly_donation}</p>
-                <h4>Year to date total</h4>
-                <p>{financeStrings.ytd_total}</p>
-                <h3>Goal</h3>
-                <h4>{new Date().getFullYear()} Total Goal</h4>
-                <p>{financeStrings.yearly_goal}</p>
-                <h4>YTD % of {new Date().getFullYear()} goal</h4>
-                <p>{financeStrings.ytd_percent}</p>
-              </div>
-            </GreyBox>
-          )}
+          </Section>
+          {finances && <Finances finances={financeStrings} />}
           {altar_flowers && (
-            <div className="bulletinSection">
+            <Section>
               <Heading>Altar Flowers</Heading>
               <div className="sectionContent">
                 <p>{altar_flowers}</p>
               </div>
-            </div>
+            </Section>
           )}
           {articles &&
             articles.map((article) => (
-              <section
-                key={article.__typename + article.id}
-                className="bulletinSection"
-              >
+              <Section key={article.__typename + article.id}>
                 <Heading>{article.title}</Heading>
                 <div className="sectionContent">
                   <P>{article.content}</P>
                 </div>
-              </section>
+              </Section>
             ))}
           <Copyright>{formatCopyright(copyright)}</Copyright>
         </main>
@@ -224,7 +206,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           position: absolute;
           top: 72px;
           max-width: 600px;
-          font-family: adobe-caslon-pro;
+          font-family: ${theme.fonts.serif};
         }
         .titlePage {
           display: flex;
@@ -256,10 +238,6 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           line-height: 1.15em;
           font-size: 1.15rem;
           margin-top: 1rem;
-        }
-        .bulletinSection {
-          margin-top: 2.25rem;
-          padding: 10px;
         }
         .sectionContent {
           margin-left: 1rem;

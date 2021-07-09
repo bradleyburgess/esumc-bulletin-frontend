@@ -1,3 +1,4 @@
+import { theme } from "../../styles/global";
 import Head from "next/head";
 import Link from "next/link";
 import client from "../../lib/apollo-client";
@@ -77,7 +78,7 @@ export default function Home({ bulletins }) {
           max-width: 500px;
         }
         h1 {
-          font-family: adobe-caslon-pro;
+          font-family: ${theme.fonts.serif};
           font-weight: bold;
           font-size: 2rem;
           text-align: center;

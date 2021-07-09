@@ -5,7 +5,7 @@ const Title = ({ children }) => (
     <h1>{children}</h1>
     <style jsx>{`
       h1 {
-        font-family: proxima-nova;
+        font-family: ${theme.fonts.sans};
         font-weight: 700;
         font-size: 1.6875rem;
         color: black;

@@ -18,7 +18,7 @@ export default function Button({ href, children, primary }) {
           border: 2px solid;
           border-radius: 25px;
           border-color: ${primary ? primaryColor : secondaryColor};
-          font-family: proxima-nova;
+          font-family: ${theme.fonts.sans};
           text-transform: uppercase;
           font-weight: bold;
           text-decoration: none;

@@ -47,7 +47,7 @@ export default function BackButton({ href }) {
           text-decoration: none;
         }
         .text {
-          font-family: proxima-nova;
+          font-family: ${theme.fonts.sans};
           font-weight: bold;
           font-size: 3.2rem;
         }

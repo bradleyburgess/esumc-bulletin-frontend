@@ -44,4 +44,8 @@ export const theme = {
   sizes: {
     boxPadding: "10px",
   },
+  fonts: {
+    sans: "proxima-nova",
+    serif: "adobe-caslon-pro",
+  },
 };
