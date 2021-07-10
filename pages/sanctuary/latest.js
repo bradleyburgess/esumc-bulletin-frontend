@@ -4,15 +4,28 @@ import {
   BULLETIN,
   GLOBAL_SETTINGS,
   LATEST_PUBLISHED_BULLETIN,
+  SANCTUARY_SETTINGS,
 } from "../../lib/queries";
 import BulletinPage from "../../components/PageComponents/BulletinPage";
 
 export async function getStaticProps() {
+  // get global settings
+  const { data: globalSettings } = await client.query({
+    query: GLOBAL_SETTINGS,
+  });
+  // get no. of days before
+  const {
+    data: {
+      sanctuarySetting: { days_before_available: daysBefore },
+    },
+  } = await client.query({
+    query: SANCTUARY_SETTINGS,
+  });
   const date = new Date();
   const { data } = await client.query({
     query: LATEST_PUBLISHED_BULLETIN,
     variables: {
-      date: getDateSearchString(date),
+      date: getDateSearchString(date, daysBefore || 2),
     },
   });
   const bulletinId = data.sanctuaryBulletins[0].uuid;
@@ -21,10 +34,6 @@ export async function getStaticProps() {
     variables: {
       uuid: bulletinId || "",
     },
-  });
-
-  const { data: globalSettings } = await client.query({
-    query: GLOBAL_SETTINGS,
   });
 
   // Redirect in case of undefined
