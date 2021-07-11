@@ -2,5 +2,9 @@
   "extends": ["next", "next/core-web-vitals"],
   "rules": {
     "react/no-children-prop": "off"
+  },
+  "plugins": ["jest"],
+  "env": {
+    "jest/globals": true
   }
 }
