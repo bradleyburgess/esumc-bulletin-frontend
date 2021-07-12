@@ -1,1 +1,3 @@
-add analytics from Matomo
+drafts page
+archive page
+refactor into components
