@@ -1,3 +1,6 @@
 drafts page
 archive page
 refactor into components
+
+"LATEST" FUNCTIONALITY: order
+Today's bulletin
