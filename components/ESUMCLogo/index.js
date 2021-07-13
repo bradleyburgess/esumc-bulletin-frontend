@@ -2,16 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import esumcLogo from "../../public/esumclogo.png";
 
-const ESUMCLogo = () => (
+const sizes = {
+  sm: "150px",
+  md: "225px",
+  lg: "300px",
+};
+
+const ESUMCLogo = ({ size, href }) => (
   <>
-    <Link href="https://esumc.org" passHref>
-      <div className="container">
-        <Image src={esumcLogo} alt="ESUMC logo" />
-      </div>
+    <Link href={href || "https://esumc.org"}>
+      <a>
+        <div className="container">
+          <Image src={esumcLogo} alt="ESUMC logo" />
+        </div>
+      </a>
     </Link>
     <style jsx>{`
       .container {
-        max-width: 300px;
+        max-width: ${sizes[size] || "300px"};
         cursor: pointer;
       }
     `}</style>
