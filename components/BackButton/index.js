@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { theme } from "../../styles/global";
 
 const {
@@ -6,15 +7,14 @@ const {
 } = theme;
 
 export default function BackButton({ href }) {
+  const router = useRouter();
   return (
     <div className="container">
-      <Link href={href}>
-        <a aria-label="Go Back">
-          <div className="btn">
-            <div className="symbol"></div>
-          </div>
-        </a>
-      </Link>
+      <a aria-label="Go Back" onClick={() => router.back()}>
+        <div className="btn">
+          <div className="symbol"></div>
+        </div>
+      </a>
       <style jsx>{`
         .container {
           margin: 0.5rem;
@@ -45,6 +45,7 @@ export default function BackButton({ href }) {
         }
         a {
           text-decoration: none;
+          cursor: pointer;
         }
         .text {
           font-family: ${theme.fonts.sans};
