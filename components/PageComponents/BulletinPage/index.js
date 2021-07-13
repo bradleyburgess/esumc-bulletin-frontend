@@ -57,7 +57,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
         <title>Sanctuary: {liturgical_calendar}</title>
       </Head>
       <header className="navigation">
-        {/* <BackButton href="/sanctuary" /> */}
+        <BackButton />
       </header>
       <div className="container">
         <main>
