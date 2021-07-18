@@ -1,6 +1,7 @@
 import { getDateSearchString } from "../../lib/dateUtils";
 import client from "../../lib/apollo-client";
 import {
+  BULLETIN,
   GLOBAL_SETTINGS,
   LATEST_PUBLISHED_BULLETIN,
   SANCTUARY_SETTINGS,
@@ -9,10 +10,9 @@ import BulletinPage from "../../components/PageComponents/BulletinPage";
 
 export async function getStaticProps() {
   // get global settings
-  // const { data: globalSettings } = await client.query({
-  //   query: GLOBAL_SETTINGS,
-  // });
-
+  const { data: globalSettings } = await client.query({
+    query: GLOBAL_SETTINGS,
+  });
   // get no. of days before
   const {
     data: {
@@ -29,27 +29,23 @@ export async function getStaticProps() {
     },
   });
   const bulletinId = data.sanctuaryBulletins[0].uuid;
-  // const { data: bulletinData } = await client.query({
-  //   query: BULLETIN,
-  //   variables: {
-  //     uuid: bulletinId || "",
-  //   },
-  // });
+  const { data: bulletinData } = await client.query({
+    query: BULLETIN,
+    variables: {
+      uuid: bulletinId || "",
+    },
+  });
 
   // Redirect in case of undefined
-  // if (!bulletinData.sanctuaryBulletins[0])
-  //   return { redirect: { destination: "/sanctuary", permanent: false } };
+  if (!bulletinData.sanctuaryBulletins[0])
+    return { redirect: { destination: "/sanctuary", permanent: false } };
   return {
-
-    redirect: { destination: `/sanctuary/${bulletinId}`, permanent: false },
+    props: {
+      bulletin: bulletinData.sanctuaryBulletins[0],
+      globalSettings: globalSettings.globalSetting,
+    },
+    revalidate: process.env.NODE_ENV === "production" ? 60 : 5,
   };
-  // return {
-  //   props: {
-  //     bulletin: bulletinData.sanctuaryBulletins[0],
-  //     globalSettings: globalSettings.globalSetting,
-  //   },
-  //   revalidate: process.env.NODE_ENV === "production" ? 60 : 5,
-  // };
 }
 
 export default BulletinPage;
