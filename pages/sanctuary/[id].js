@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   });
   return {
     paths: data.sanctuaryBulletins.map((d) => `/sanctuary/${d.uuid}`),
-    fallback: "blocking",
+    fallback: true,
   };
 }
 
