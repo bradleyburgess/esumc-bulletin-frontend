@@ -1,51 +1,51 @@
-import { getDateSearchString } from "../../lib/dateUtils";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+// import { ApolloProvider, useQuery } from "@apollo/client";
 import client from "../../lib/apollo-client";
 import {
-  BULLETIN,
-  GLOBAL_SETTINGS,
-  LATEST_PUBLISHED_BULLETIN,
   SANCTUARY_SETTINGS,
+  LATEST_PUBLISHED_BULLETIN,
 } from "../../lib/queries";
-import BulletinPage from "../../components/PageComponents/BulletinPage";
+import { getDateSearchString } from "../../lib/dateUtils";
+import Loading from "../../components/Loading";
 
-export async function getStaticProps() {
-  // get global settings
-  const { data: globalSettings } = await client.query({
-    query: GLOBAL_SETTINGS,
-  });
-  // get no. of days before
-  const {
-    data: {
-      sanctuarySetting: { days_before_available: daysBefore },
-    },
-  } = await client.query({
-    query: SANCTUARY_SETTINGS,
-  });
-  const date = new Date();
-  const { data } = await client.query({
-    query: LATEST_PUBLISHED_BULLETIN,
-    variables: {
-      date: getDateSearchString(date, daysBefore || 2),
-    },
-  });
-  const bulletinId = data.sanctuaryBulletins[0].uuid;
-  const { data: bulletinData } = await client.query({
-    query: BULLETIN,
-    variables: {
-      uuid: bulletinId || "",
-    },
-  });
-
-  // Redirect in case of undefined
-  if (!bulletinData.sanctuaryBulletins[0])
-    return { redirect: { destination: "/sanctuary", permanent: false } };
-  return {
-    props: {
-      bulletin: bulletinData.sanctuaryBulletins[0],
-      globalSettings: globalSettings.globalSetting,
-    },
-    revalidate: process.env.NODE_ENV === "production" ? 60 : 5,
-  };
+export default function LatestPage() {
+  const router = useRouter();
+  useEffect(() => {
+    (async () => {
+      // get no. of days before
+      const {
+        data: {
+          sanctuarySetting: { days_before_available: daysBefore },
+        },
+      } = await client.query({
+        query: SANCTUARY_SETTINGS,
+      });
+      const date = new Date();
+      const { data } = await client.query({
+        query: LATEST_PUBLISHED_BULLETIN,
+        variables: {
+          date: getDateSearchString(date, daysBefore || 2),
+        },
+      });
+      const bulletinId = data.sanctuaryBulletins[0].uuid;
+      router.replace(`/sanctuary/${bulletinId}`);
+    })();
+  }, []);
+  return (
+    <>
+      <div className="container">
+        <Loading text="Loading bulletin …" />
+      </div>
+      <style jsx>{`
+        .container {
+          height: 100vh;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      `}</style>
+    </>
+  );
 }
-
-export default BulletinPage;
