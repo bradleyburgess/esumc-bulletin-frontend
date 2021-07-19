@@ -2,12 +2,15 @@ import Spinner from "./Spinner";
 import P from "../Paragraph";
 
 const Loading = ({ text }) => (
-  <div>
+  <div className="container">
     <div className="spinner">
       <Spinner />
     </div>
     <P>{text || "Loading bulletins…"}</P>
     <style jsx>{`
+      .container {
+        text-align: center;
+      }
       .spinner {
         margin-bottom: 1.5rem;
       }
