@@ -4,11 +4,11 @@ import { ApolloProvider, useQuery } from "@apollo/client";
 import client from "../../lib/apollo-client";
 import { DRAFT_BULLETINS_LIST } from "../../lib/queries";
 import { createDateObject, createDateString } from "../../lib/dateUtils";
-import Loading from "../../components/Loading";
-import Title from "../../components/IndexTitle";
-import P from "../../components/Paragraph";
-import ESUMCLogo from "../../components/ESUMCLogo";
-import BulletinsList from "../../components/BulletinsList";
+import Loading from "../../components/common/Loading";
+import Title from "../../components/common/IndexTitle";
+import P from "../../components/common/Paragraph";
+import ESUMCLogo from "../../components/common/ESUMCLogo";
+import BulletinsList from "../../components/common/BulletinsList";
 
 export async function getStaticProps() {
   try {

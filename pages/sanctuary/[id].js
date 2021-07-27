@@ -4,7 +4,7 @@ import {
   BULLETINS_LIST_IDS,
   GLOBAL_SETTINGS,
 } from "../../lib/queries";
-import BulletinPage from "../../components/PageComponents/BulletinPage";
+import BulletinPage from "../../components/page/sanctuary/BulletinPage";
 
 export async function getStaticPaths() {
   const { data } = await client.query({

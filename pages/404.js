@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import esumcLogo from "../public/esumclogo.png";
-import A from "../components/Anchor";
+import A from "../components/common/Anchor";
 
 export default function ErrorPage() {
   return (

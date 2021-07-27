@@ -6,7 +6,7 @@ import {
   LATEST_PUBLISHED_BULLETIN,
   SANCTUARY_SETTINGS,
 } from "../../lib/queries";
-import BulletinPage from "../../components/PageComponents/BulletinPage";
+import BulletinPage from "../../components/page/sanctuary/BulletinPage";
 
 export async function getStaticProps() {
   // get global settings

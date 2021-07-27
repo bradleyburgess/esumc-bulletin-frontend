@@ -2,8 +2,8 @@ import { theme } from "../styles/global";
 import Head from "next/head";
 import Image from "next/image";
 import roseWindow from "../public/rosette.png";
-import Button from "../components/Button";
-import ESUMCLogo from "../components/ESUMCLogo";
+import Button from "../components/common/Button";
+import ESUMCLogo from "../components/common/ESUMCLogo";
 
 export default function Home() {
   return (

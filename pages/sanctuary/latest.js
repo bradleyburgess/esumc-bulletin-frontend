@@ -7,7 +7,7 @@ import {
   LATEST_PUBLISHED_BULLETIN,
 } from "../../lib/queries";
 import { getDateSearchString } from "../../lib/dateUtils";
-import Loading from "../../components/Loading";
+import Loading from "../../components/common/Loading";
 
 export default function LatestPage() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function LatestPage() {
       const bulletinId = data.sanctuaryBulletins[0].uuid;
       router.replace(`/sanctuary/${bulletinId}`);
     })();
-  }, []);
+  }, [router]);
   return (
     <>
       <div className="container">
