@@ -6,6 +6,8 @@ export const theme = {
     primary: "#2c6279",
     secondary: "#97b365",
     red: "#c62828",
+    teal: "#337784",
+    orange: "#EB4C2B"
   },
   sizes: {
     boxPadding: "10px",

@@ -9,7 +9,7 @@ const HR = () => (
         border: 0;
         border-radius: 1px;
         height: 2px;
-        background-color: ${theme.colors.lightGrey};
+        background-color: ${theme.colors.teal};
         margin: 2rem auto;
       }
     `}</style>

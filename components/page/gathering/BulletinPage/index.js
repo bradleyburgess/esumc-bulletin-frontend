@@ -68,7 +68,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
               {address.city}, {address.state} {address.zip}
             </p>
             <p className="address">
-              <A href={website}>{urlString}</A>
+              <A href={website} color={theme.colors.orange}>{urlString}</A>
             </p>
           </div>
           <HR />

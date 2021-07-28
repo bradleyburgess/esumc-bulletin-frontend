@@ -1,6 +1,6 @@
 import { theme } from "../../../styles/global";
 
-const Anchor = ({ href, children }) => (
+const Anchor = ({ href, children, color }) => (
   <>
     <a href={href}>{children}</a>
     <style jsx>
@@ -11,7 +11,7 @@ const Anchor = ({ href, children }) => (
           font-weight: bold;
           transition: all 0.15s ease-out;
           &:hover {
-            color: ${theme.colors.red};
+            color: ${color || theme.colors.red};
             transtion: all 0.15s ease-out;
           }
         }
