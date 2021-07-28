@@ -1,9 +1,9 @@
 import { getDateSearchString } from "../../lib/dateUtils";
 import client from "../../lib/apollo-client";
 import {
-  BULLETIN,
+  SANCTUARY_BULLETIN,
   GLOBAL_SETTINGS,
-  LATEST_PUBLISHED_BULLETIN,
+  LATEST_PUBLISHED_SANCTUARY_BULLETIN,
   SANCTUARY_SETTINGS,
 } from "../../lib/queries";
 import BulletinPage from "../../components/page/sanctuary/BulletinPage";
@@ -23,14 +23,14 @@ export async function getStaticProps() {
   });
   const date = new Date();
   const { data } = await client.query({
-    query: LATEST_PUBLISHED_BULLETIN,
+    query: LATEST_PUBLISHED_SANCTUARY_BULLETIN,
     variables: {
       date: getDateSearchString(date, daysBefore || 2),
     },
   });
   const bulletinId = data.sanctuaryBulletins[0].uuid;
   const { data: bulletinData } = await client.query({
-    query: BULLETIN,
+    query: SANCTUARY_BULLETIN,
     variables: {
       uuid: bulletinId || "",
     },

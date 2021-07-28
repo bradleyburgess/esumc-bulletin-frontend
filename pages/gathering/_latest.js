@@ -1,12 +1,12 @@
 import { getDateSearchString } from "../../lib/dateUtils";
 import client from "../../lib/apollo-client";
 import {
-  BULLETIN,
+  GATHERING_BULLETIN,
   GLOBAL_SETTINGS,
-  LATEST_PUBLISHED_BULLETIN,
-  SANCTUARY_SETTINGS,
+  LATEST_PUBLISHED_GATHERING_BULLETIN,
+  GATHERING_SETTINGS,
 } from "../../lib/queries";
-import BulletinPage from "../../components/page/sanctuary/BulletinPage";
+import BulletinPage from "../../components/page/gathering/BulletinPage";
 
 export async function getStaticProps() {
   // get global settings
@@ -16,32 +16,32 @@ export async function getStaticProps() {
   // get no. of days before
   const {
     data: {
-      sanctuarySetting: { days_before_available: daysBefore },
+      gatheringSetting: { days_before_available: daysBefore },
     },
   } = await client.query({
-    query: SANCTUARY_SETTINGS,
+    query: GATHERING_SETTINGS,
   });
   const date = new Date();
   const { data } = await client.query({
-    query: LATEST_PUBLISHED_BULLETIN,
+    query: LATEST_PUBLISHED_GATHERING_BULLETIN,
     variables: {
       date: getDateSearchString(date, daysBefore || 2),
     },
   });
-  const bulletinId = data.sanctuaryBulletins[0].uuid;
+  const bulletinId = data.gatheringBulletins[0].uuid;
   const { data: bulletinData } = await client.query({
-    query: BULLETIN,
+    query: GATHERING_BULLETIN,
     variables: {
       uuid: bulletinId || "",
     },
   });
 
   // Redirect in case of undefined
-  if (!bulletinData.sanctuaryBulletins[0])
+  if (!bulletinData.gatheringBulletins[0])
     return { redirect: { destination: "/sanctuary", permanent: false } };
   return {
     props: {
-      bulletin: bulletinData.sanctuaryBulletins[0],
+      bulletin: bulletinData.gatheringBulletins[0],
       globalSettings: globalSettings.globalSetting,
     },
     revalidate: process.env.NODE_ENV === "production" ? 60 : 5,
