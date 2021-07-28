@@ -1,24 +1,24 @@
 import client from "../../lib/apollo-client";
 import {
-  SANCTUARY_BULLETIN,
-  SANCTUARY_BULLETINS_LIST_IDS,
+  GATHERING_BULLETIN,
+  GATHERING_BULLETINS_LIST_IDS,
   GLOBAL_SETTINGS,
 } from "../../lib/queries";
-import BulletinPage from "../../components/page/sanctuary/BulletinPage";
+import BulletinPage from "../../components/page/gathering/BulletinPage";
 
 export async function getStaticPaths() {
   const { data } = await client.query({
-    query: SANCTUARY_BULLETINS_LIST_IDS,
+    query: GATHERING_BULLETINS_LIST_IDS,
   });
   return {
-    paths: data.sanctuaryBulletins.map((d) => `/sanctuary/${d.uuid}`),
+    paths: data.gatheringBulletins.map((d) => `/gathering/${d.uuid}`),
     fallback: "blocking",
   };
 }
 
 export async function getStaticProps(context) {
   const { data: bulletinData } = await client.query({
-    query: SANCTUARY_BULLETIN,
+    query: GATHERING_BULLETIN,
     variables: {
       uuid: context.params.id || "",
     },
@@ -29,12 +29,12 @@ export async function getStaticProps(context) {
   });
 
   // Redirect in case of undefined
-  if (!bulletinData.sanctuaryBulletins[0])
-    return { redirect: { destination: "/sanctuary", permanent: false } };
+  if (!bulletinData.gatheringBulletins[0])
+    return { redirect: { destination: "/gathering", permanent: false } };
 
   return {
     props: {
-      bulletin: bulletinData.sanctuaryBulletins[0],
+      bulletin: bulletinData.gatheringBulletins[0],
       globalSettings: globalSettings.globalSetting,
     },
     revalidate: process.env.NODE_ENV === "production" ? 60 : 5,

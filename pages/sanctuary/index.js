@@ -2,7 +2,7 @@ import Head from "next/head";
 // import Link from "next/link";
 import { ApolloProvider, useQuery } from "@apollo/client";
 import client from "../../lib/apollo-client";
-import { BULLETINS_LIST } from "../../lib/queries";
+import { SANCTUARY_BULLETINS_LIST } from "../../lib/queries";
 import { createDateObject, createDateString } from "../../lib/dateUtils";
 import Loading from "../../components/common/Loading";
 import Title from "../../components/common/IndexTitle";
@@ -13,7 +13,7 @@ import BulletinsList from "../../components/common/BulletinsList";
 export async function getStaticProps() {
   try {
     const { data } = await client.query({
-      query: BULLETINS_LIST,
+      query: SANCTUARY_BULLETINS_LIST,
     });
     return {
       props: {
@@ -40,7 +40,7 @@ export default function SanctuaryPage() {
 }
 
 function SanctuaryBulletins() {
-  const { loading, error, data } = useQuery(BULLETINS_LIST);
+  const { loading, error, data } = useQuery(SANCTUARY_BULLETINS_LIST);
 
   return (
     <>
@@ -58,9 +58,12 @@ function SanctuaryBulletins() {
           {loading && <Loading />}
           {data &&
             (data.sanctuaryBulletins.length > 0 ? (
-              <BulletinsList bulletins={data.sanctuaryBulletins} />
+              <BulletinsList
+                bulletins={data.sanctuaryBulletins}
+                location="sanctuary"
+              />
             ) : (
-              <P>There are currently no drafts 🙂</P>
+              <P>There are currently no bulletins to show.</P>
             ))}
           {error && <p>Internal server error</p>}
         </main>
@@ -87,4 +90,3 @@ function SanctuaryBulletins() {
     </>
   );
 }
-

@@ -3,7 +3,7 @@ import { theme } from "../../../styles/global";
 import Link from "next/link";
 import { createDateString, createDateObject } from "../../../lib/dateUtils";
 
-const BulletinsList = ({ bulletins }) => {
+const BulletinsList = ({ bulletins, location }) => {
   return (
     <>
       <div className="container">
@@ -12,7 +12,7 @@ const BulletinsList = ({ bulletins }) => {
             const date = createDateObject(bulletin.date);
             return (
               <li key={bulletin.uuid}>
-                <Link href={`/sanctuary/${bulletin.uuid}`}>
+                <Link href={`/${location}/${bulletin.uuid}`}>
                   <a>
                     <Date>{createDateString(date)}</Date>
                     <br />

@@ -2,7 +2,7 @@ import Head from "next/head";
 // import Link from "next/link";
 import { ApolloProvider, useQuery } from "@apollo/client";
 import client from "../../lib/apollo-client";
-import { DRAFT_SANCTUARY_BULLETINS_LIST } from "../../lib/queries";
+import { DRAFT_GATHERING_BULLETINS_LIST } from "../../lib/queries";
 import { createDateObject, createDateString } from "../../lib/dateUtils";
 import Loading from "../../components/common/Loading";
 import Title from "../../components/common/IndexTitle";
@@ -13,11 +13,11 @@ import BulletinsList from "../../components/common/BulletinsList";
 export async function getStaticProps() {
   try {
     const { data } = await client.query({
-      query: DRAFT_SANCTUARY_BULLETINS_LIST,
+      query: DRAFT_GATHERING_BULLETINS_LIST,
     });
     return {
       props: {
-        bulletins: data.sanctuaryBulletins,
+        bulletins: data.gatheringBulletins,
       },
       revalidate: 60,
     };
@@ -40,27 +40,27 @@ export default function DraftsPage() {
 }
 
 function Drafts() {
-  const { loading, error, data } = useQuery(DRAFT_SANCTUARY_BULLETINS_LIST);
+  const { loading, error, data } = useQuery(DRAFT_GATHERING_BULLETINS_LIST);
 
   return (
     <>
       <Head>
-        <title>ESUMC Sanctuary Bulletins: Drafts</title>
+        <title>ESUMC Gathering Bulletins: Drafts</title>
         <meta name="description" content="ESUMC Online Worship Bulletin" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container">
         <header>
           <ESUMCLogo size="sm" href="/" />
-          <Title>Draft Sanctuary Bulletins</Title>
+          <Title>Draft Gathering Bulletins</Title>
         </header>
         <main>
           {loading && <Loading />}
           {data &&
-            (data.sanctuaryBulletins.length > 0 ? (
+            (data.gatheringBulletins.length > 0 ? (
               <BulletinsList
-                bulletins={data.sanctuaryBulletins}
-                location="sanctuary"
+                bulletins={data.gatheringBulletins}
+                location="gathering"
               />
             ) : (
               <P>There are currently no drafts 🙂</P>
