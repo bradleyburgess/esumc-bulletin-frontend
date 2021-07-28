@@ -4,14 +4,14 @@ import Image from "next/image";
 import Head from "next/head";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
-import roseWindow from "../../../../public/rosette.png";
+import gatheringLogo from "../../../../public/gatheringlogo_full.png";
 import BackButton from "../../../../components/common/BackButton";
-import HR from "../../../../components/sanctuary/HR";
+import HR from "../../../../components/gathering/HR";
 import A from "../../../../components/common/Anchor";
-import Heading from "../../../../components/sanctuary/Heading";
-import P from "../../../../components/sanctuary/Paragraph";
+import Heading from "../../../../components/gathering/Heading";
+import P from "../../../../components/gathering/Paragraph";
 import Copyright from "../../../../components/common/Copyright";
-import Section from "../../../../components/sanctuary/Section";
+import Section from "../../../../components/gathering/Section";
 import { createDateObject, createDateString } from "../../../../lib/dateUtils";
 import { formatUrl, formatCopyright } from "../../../../lib/stringUtils";
 
@@ -50,18 +50,17 @@ export default function BulletinPage({ bulletin, globalSettings }) {
       <div className="container">
         <main>
           <div className="titlePage">
-            <div className="roseWindow">
+            <div className="logo">
               <Image
                 alt="Sanctuary Rose Window"
-                src={custom_image ? custom_image : roseWindow}
+                src={custom_image ? custom_image : gatheringLogo}
               />
             </div>
-            <h1 className="bulletinTitle">{title}</h1>
+            <h1 className="bulletinTitle">{liturgical_calendar}</h1>
             <HR />
             <h2 className="bulletinSubTitle">
-              {createDateString(date)} <br />
-              {liturgical_calendar} <br />
-              {date.time}
+              {createDateString(date)} | {date.time}
+              {/* {liturgical_calendar} <br /> */}
             </h2>
             <p className="address">
               {address.street} <br />
@@ -75,7 +74,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           <HR />
           {liturgy_order.map((item) => (
             <Section key={item.__typename + item.id} greybox={item.greybox}>
-              <div className="sectionHeading">
+              <div>
                 <Heading>{item.heading}</Heading>
               </div>
               <div
@@ -109,7 +108,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           position: absolute;
           top: 72px;
           max-width: 600px;
-          font-family: ${theme.fonts.serif};
+          font-family: ${theme.fonts.sans};
         }
         .titlePage {
           display: flex;
@@ -120,7 +119,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
         }
         .bulletinTitle {
           margin-top: 2rem;
-          font-weight: normal;
+          font-weight: bold;
           text-transform: uppercase;
           line-height: 1.5em;
         }
@@ -130,11 +129,11 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           font-weight: normal;
           line-height: 1.5em;
         }
-        .roseWindow {
+        .logo {
           max-width: 400px;
         }
         @media screen and (max-width: 450px) {
-          .roseWindow {
+          .logo {
             max-width: 300px;
           }
         }
@@ -144,7 +143,6 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           margin-top: 1rem;
         }
         .sectionContent {
-          margin-left: 1rem;
           margin-top: 0.55rem;
         }
         @media screen and (max-width: 450px) {
