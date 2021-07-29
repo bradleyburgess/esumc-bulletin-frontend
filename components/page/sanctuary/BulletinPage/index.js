@@ -88,7 +88,7 @@ export default function BulletinPage({ bulletin, globalSettings }) {
           {liturgy_order.map((item) => (
             <Section key={item.__typename + item.id} greybox={item.greybox}>
               <div className="sectionHeading">
-                <Heading>{item.heading}</Heading>
+                <Heading standing={item.standing}>{item.heading}</Heading>
                 {item.subheading && <SubHeading>{item.subheading}</SubHeading>}
               </div>
               <div
