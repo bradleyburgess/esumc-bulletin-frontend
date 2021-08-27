@@ -1,13 +1,17 @@
 module.exports = {
   root: true,
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "prettier", "jest"],
+  // parser: "@typescript-eslint/parser",
+  plugins: [
+    // "@typescript-eslint",
+    "prettier",
+    "jest",
+  ],
   extends: [
-    // "next/core-web-vitals",
-    "plugin:@next/next/recommended",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
+    // "plugin:@next/next/recommended",
+    // "eslint:recommended",
+    // "plugin:@typescript-eslint/eslint-recommended",
+    // "plugin:@typescript-eslint/recommended",
     "prettier",
   ],
   rules: {
