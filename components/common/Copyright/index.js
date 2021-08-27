@@ -1,17 +1,16 @@
 const Copyright = ({ children }) => (
   <>
-    <footer className="copyright">
+    <footer className="root">
       <p className="text">{children}</p>
     </footer>
     <style jsx>{`
-      .copyright {
+      .root {
         display: flex;
         justify-content: center;
         margin-top: 2rem;
       }
       .text {
         max-width: 400px;
-        font-style: italic;
         text-align: center;
         line-height: 1.15em;
       }
