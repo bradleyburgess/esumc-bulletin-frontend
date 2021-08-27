@@ -116,10 +116,12 @@ export default function BulletinPage({ bulletin, globalSettings }) {
                     className="servingListItem"
                   >
                     <SubHeading span>{item.name} </SubHeading>
-                    <br />
-                    <span className="servingRole">
-                      {item.role && item.role}
-                    </span>
+                    {item.role && (
+                      <>
+                        <br />
+                        <span className="servingRole">{item.role}</span>
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
