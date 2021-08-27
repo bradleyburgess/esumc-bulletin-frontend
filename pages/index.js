@@ -30,91 +30,145 @@ export default function Home() {
       <Head>
         <title>ESUMC Online Bulletin</title>
       </Head>
-      <div className="container">
-        <div className="box">
+      <Container>
+        <Box>
           <header>
             <ESUMCLogo />
-            <h1 style={{ marginTop: "1rem" }}>ESUMC Online Bulletins</h1>
+            <Heading>ESUMC Online Bulletins</Heading>
           </header>
-          <main>
+          <main style={{ width: "100%" }}>
             {locations.map((location) => (
-              <section style={{ marginTop: "2rem" }} key={location.name}>
-                <div className="sectionHeader">
-                  <div className="sectionLogo">
-                    <Image src={location.image.src} alt={location.image.alt} />
-                  </div>
-                  <h2>{makeTitleCase(location.name)}</h2>
-                </div>
-                <div className="buttons">
+              <Section key={location.name}>
+                <SectionHeader>
+                  <Logo location={location} />
+                  <Name>{makeTitleCase(location.name)}</Name>
+                </SectionHeader>
+                <ButtonsContainer>
                   <Button href={`/${location.name}/latest`} primary>
                     Latest
                   </Button>
                   <Button href={`/${location.name}`}>Archive</Button>
-                </div>
-              </section>
+                </ButtonsContainer>
+              </Section>
             ))}
           </main>
-        </div>
-      </div>
-
-      <style jsx>
-        {`
-          .container {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            margin: 0 1rem;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            -webkit-box-shadow: 6px 5px 15px -4px rgba(113, 113, 113, 0.63);
-            box-shadow: 6px 5px 15px -4px rgba(113, 113, 113, 0.63);
-          }
-
-          h1 {
-            font-size: 1.5em;
-            font-family: ${theme.fonts.serif};
-            text-align: center;
-          }
-          main {
-            width: 100%;
-          }
-          // section {
-          //   display: flex;
-          // }
-          .sectionHeader {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .sectionHeader h2 {
-            font-weight: normal;
-            font-family: ${theme.fonts.sans};
-            // font-size: 1.5em;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            padding-left: 0.8em;
-            color: ${theme.colors.darkGrey};
-          }
-          .sectionLogo {
-            width: 50px;
-          }
-          .buttons {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1rem;
-          }
-        `}
-      </style>
+        </Box>
+      </Container>
     </>
   );
 }
+
+const Container = ({ children }) => (
+  <div className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    `}</style>
+  </div>
+);
+
+const Box = ({ children }) => (
+  <div className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        margin: 0 1rem;
+        border: 1px solid #ccc;
+        border-radius: 7px;
+        -webkit-box-shadow: 6px 5px 15px -4px rgba(113, 113, 113, 0.63);
+        box-shadow: 6px 5px 15px -4px rgba(113, 113, 113, 0.63);
+      }
+    `}</style>
+  </div>
+);
+
+const Heading = ({ children }) => (
+  <h1 className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        margin-top: 1rem;
+        font-size: 1.5em;
+        font-family: ${theme.fonts.serif};
+        text-align: center;
+      }
+    `}</style>
+  </h1>
+);
+
+const Section = ({ children }) => (
+  <section className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        margin-top: 2rem;
+      }
+    `}</style>
+  </section>
+);
+
+const SectionHeader = ({ children }) => (
+  <div className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    `}</style>
+  </div>
+);
+
+const Logo = ({ location }) => (
+  <div className="root">
+    <Image src={location.image.src} alt={location.image.alt} />
+    <style jsx>{`
+      .root {
+        width: 50px;
+      }
+    `}</style>
+  </div>
+);
+
+const Name = ({ children }) => (
+  <h2 className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        font-weight: normal;
+        font-family: ${theme.fonts.sans};
+        // font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        padding-left: 0.8em;
+        color: ${theme.colors.darkGrey};
+      }
+    `}</style>
+  </h2>
+);
+
+const ButtonsContainer = ({ children }) => (
+  <div className="root">
+    {children}
+    <style jsx>{`
+      .root {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem;
+      }
+    `}</style>
+  </div>
+);
